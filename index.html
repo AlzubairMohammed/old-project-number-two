@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/angular.min.js"></script>
+  <script src="./js/angular-route.js"></script>
+
+  <script>
+    var app = angular.module("myApp", ["ngRoute"])
+    app.config(function ($routeProvider) {
+      $routeProvider
+        .when("/", {
+          templateUrl: "templates/home.html",
+          controller: "homeCtrl"
+        })
+        .when("/store", {
+          templateUrl: "templates/store.html",
+          controller: "storeCtrl"
+        })
+        .when("/fourm", {
+          templateUrl: "templates/fourm.html",
+          controller: "fourmCtrl"
+        })
+        .when("/contact", {
+          templateUrl: "templates/contact.html",
+          controller: "contactCtrl"
+        })
+        .otherwise({
+          template: "<h1>404 Page Not Found</h1>"
+        })
+    })
+    app.controller("storeCtrl", function ($scope, $rootScope) {
+      $scope.R_coun=0;
+      $scope.C_btn="Buy";
+      $scope.pons = ()=>{
+        ++$scope.R_coun;
+      }
+      $scope.pons1 = ()=>{
+        --$scope.R_coun;
+      }
+      $scope.pictures = [
+        { name: "Picture1", img: 'images/optimus1.jpg', price: 15000, company: "Marvel", modernity: "Old", marvel: 0 },
+        { name: "Picture2", img: 'images/optimus2.jpg', price: 39000, company: "Netflix", modernity: "Old", netflix: 0, },
+        { name: "Picture3", img: 'images/optimus3.jpg', price: 30000, company: "Amazon", modernity: "Old", amazon: 0 },
+        { name: "Picture4", img: 'images/optimus4.jpg', price: 11000, company: "Marvel", modernity: "Old", marvel: 0 },
+        { name: "Picture5", img: 'images/optimus5.jpg', price: 18000, company: "Netflix", modernity: "Brand", netflix: 0 },
+        { name: "Picture6", img: 'images/optimus6.jpg', price: 29500, company: "Amazon", modernity: "Brand", amazon: 0 },
+        { name: "Picture7", img: 'images/optimus7.jpg', price: 29999, company: "Marvel", modernity: "Brand", marvel: 0 },
+        { name: "Picture8", img: 'images/optimus8.jpg', price: 60000, company: "Netflix", modernity: "Brand", netflix: 0 },
+        { name: "Picture9", img: 'images/optimus9.jpg', price: 25000, company: "Amazon", modernity: "New", amazon: 0 },
+        { name: "Picture10", img: 'images/optimus10.jpg', price: 16000, company: "Amazon", modernity: "New", amazon: 0 },
+        { name: "Picture11", img: 'images/optimus11.jpg', price: 37000, company: "Marvel", modernity: "New", marvel: 0 },
+        { name: "Picture12", img: 'images/optimus12.jpg', price: 39500, company: "Netflix", modernity: "New", netflix: 0 }
+      ]
+     
+    })
+    app.filter("priceFilter",function ($rootScope) {
+            return function (pictures,min,max) {
+                var out=[]
+                if(!min && !max){
+                    return pictures
+                }
+                else if(min && !max){
+                    pictures.forEach(function (product) {
+                        if(product.price>=min)
+                            out.push(product)
+                    })
+                }
+                else if(!min && max){
+                    pictures.forEach(function (product) {
+                        if(product.price<max)
+                            out.push(product)
+                    })
+                }
+                else{
+                    pictures.forEach(function (product) {
+                        if(product.price>=min && product.price<max)
+                            out.push(product)
+                    })
+                }
+                return out
+            }
+            
+        })
+    app.controller("fourmCtrl", function ($scope, $rootScope) {
+      ls = false
+      $scope.change =()=>{
+        ls = !ls
+      }
+      x1 = 'ng-model="l"'
+      x2 = 'value="{{l}}"'
+      $rootScope.l = 4
+      $scope.data = [
+        { name: "Mohammed Hassan", comment: " Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Craspurus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus." },
+        { name: "Ahmed Ali", comment: " Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Craspurus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus." },
+        { name: "Mona Hussam", comment: " Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Craspurus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus." }
+      ]
+
+    })
+
+
+
+  </script>
+  <title>Optimus prime</title>
+</head>
+
+<body ng-app="myApp">
+  <!-- start my navbar-->
+  <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <img id="icon_id" src="./images/optimusprimelogo.jpg" alt="">
+      <a class="navbar-brand" href="#">Optimus</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#/!">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!store">Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!fourm">Fourm</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item A_btn3" id="" href="store.html#upperclass">Upper class</a></li>
+              <li><a class="dropdown-item A_btn2" id="" href="store.html#middleclass">Middle class</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item A_btn1" id="" href="store.html#lowerclass">Lower class</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!contact">Contact</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- End my navbar-->
+  <div class="container_fluid" id="full_page">
+    <ng-view></ng-view>
+  </div>
+  <!-- Start footer -->
+  <footer id="footer" class="bd-footer py-5 mt-5">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-3 mb-3">
+          <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/"
+            aria-label="Bootstrap">
+            <img id="icon_id" src="./images/optimusprimelogo.jpg" alt="">
+            <span class="fs-5">Optimus</span>
+          </a>
+          <ul class="list-unstyled small text-muted">
+            <li class="mb-2">This is store done by our team in two days yoou can flow us by this link <a
+                href="facebook.com/alzubair0">SAS team</a> with the help of <a
+                href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</li>
+            <li class="mb-2">Code licensed <a href="https://github.com/twbs/bootstrap/blob/main/LICENSE" target="_blank"
+                rel="license noopener">SAS</a></li>
+            <li class="mb-2">Done by Alzubair</li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+          <h5>Pages</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="home.html">Home</a></li>
+            <li class="mb-2"><a href="store.html">Store</a></li>
+            <li class="mb-2"><a href="contact.html">Contact</a></li>
+            <li class="mb-2"><a href="fourm.html">Fourm</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5>Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="store.html#upperclass">Upper Class</a></li>
+            <li class="mb-2"><a href="store.html#middleclass">Middle class</a></li>
+            <li class="mb-2"><a href="store.html#lowerclass">Lower class</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5>Projects</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="https://github.com/twbs/bootstrap">jQuery</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/bootstrap/tree/v4-dev">Bootstrap</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/icons">HTML</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/rfs">CSS</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/bootstrap-npm-starter">Java Script</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5>Community</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#">Issues</a></li>
+            <li class="mb-2"><a href="#">Discussions</a></li>
+            <li class="mb-2"><a href="#">Corporate sponsors</a></li>
+            <li class="mb-2"><a href="#">Open Collective</a></li>
+            <li class="mb-2"><a href="#">Slack</a></li>
+            <li class="mb-2"><a href="#">Stack Overflow</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End footer -->
+</body>
+
+</html>

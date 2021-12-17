@@ -1,0 +1,30 @@
+<div class="L-group container">
+    <!-- Start List Group -->
+    <ul class="list-group" id="L-group1">
+        <li class="list-group-item" ng-repeat="info in data">
+            <!-- Start Media -->
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1">{{info.name}}</h5>
+                   {{info.comment}}
+                </div>
+                <img class="ml-3" src="./images/person.svg" alt="Generic placeholder image">
+            </div>
+            <!-- End Media -->
+        </li>
+    </ul>
+    <li class="list-group-item">
+        <form action="#">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1"  class="form-label">Your name</label>
+                <input type="text" class="form-control" ng-model="U_name" id="exampleFormControlInput1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Your comment</label>
+                <textarea class="form-control"  ng-model="U_comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button class="btn btn-primary" id="F-btn" type="submit" ng-click="data.push({name:U_name,comment:U_comment});U_name='';U_comment='';$event.preventDefault()">Submit comment</button>
+        </form>
+    </li>
+    <!-- End List Group -->
+</div>

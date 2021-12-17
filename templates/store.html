@@ -1,0 +1,94 @@
+<!-- Start recycle -->
+<img id="cart"  src="./images/cart4.svg" alt="">
+<button ng-click="togg=!togg" id="cart_btn">{{R_coun}}</button>
+<!-- End recycle -->
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <!-- Start Accordion -->
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="A_btn1 accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Companies
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <button class="btn btn-primary btn-lg" href="" ng-click="V_company='Marvel'; V_price='' ;V_moderinty='';max='';min=''">Marvel</button >
+                        <button class="btn btn-primary btn-lg" href="" ng-click="V_company='Netflix'; V_price='' ;V_moderinty='';max='';min=''">Netflix</button >
+                        <button class="btn btn-primary btn-lg" href="" ng-click="V_company='Amazon'; V_price='' ;V_moderinty='';max='';min=''">Amazon</button >
+                        </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="A_btn2 accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Prices
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <button class="btn btn-primary btn-lg" href=""ng-click="V_moderinty=''; V_company=''; V_price='';min=10000; max=20000">10000-20000</button >
+                        <button class="btn btn-primary btn-lg" href=""ng-click="V_moderinty=''; V_company=''; V_price='';min=20000; max=30000">20000-30000</button >
+                        <button class="btn btn-primary btn-lg" href=""ng-click="V_moderinty=''; V_company=''; V_price='';min=30000; max=40000">30000-40000</button >
+                        </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="A_btn3 accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Modernity
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <button class="btn btn-primary btn-lg" href="" ng-click="V_moderinty='New'; V_company=''; V_price='';max='';min=''">New</button >
+                        <button class="btn btn-primary btn-lg" href="" ng-click="V_moderinty='Old' ;V_company='' ;V_price='';max='';min=''">Old</button >
+                        <button class="btn btn-primary btn-lg" href="" ng-click="V_moderinty='Brand'; V_company=''; V_price='';max='';min=''">Brand</button >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Accordion -->
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12" >
+        <!-- Start tab -->
+        <ul id="N_tabs" class="nav nav-tabs">
+            <li  class="nav-item">
+                <a id="A_tab" class="nav-link {{A_active_v}}" aria-current="page" href="" ng-click="A_active_v='active';M_active_v='';U_active_v='';L_active_v='';min=10000; max=65000;V_moderinty=''; V_company=''; V_price='';">All</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{U_active_v}}" href="" ng-click="A_active_v='';U_active_v='active';L_active_v='';M_active_v='';min=40000; max=65000;V_moderinty=''; V_company=''; V_price='';">Upper class</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{L_active_v}}" href="" ng-click="A_active_v='';L_active_v='active';M_active_v='';U_active_v='';min=10000; max=20000;V_moderinty=''; V_company=''; V_price='';">Lower class</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link {{M_active_v}}" href="" ng-click="A_active_v='';M_active_v='active';U_active_v='';L_active_v='';min=20000; max=40000;V_moderinty=''; V_company=''; V_price='';">Middle class</a>
+            </li>
+        </ul>
+        <div class="tab-content">          
+             <div class="tab-pane active">
+                <div class=" row g-0 rounded shadow-sm">
+                <div id="card_body"  ng-class="togg?C_btn:''" ng-click=" de=!de;de? (pons()):(pons1() );de? (C_btn='Bought'):(C_btn='Buy' );" class="card col-lg-2 col-md-2 col-sm-2 col-xs-2 " ng-repeat="picture in pictures|filter:{modernity:V_moderinty,company:V_company}|priceFilter:min:max">
+                        <img id="card_image_id" src="{{picture.img}}" class="card-img-top" alt="..."> 
+                        <div  class="card-body">
+                            <h5 class="card-title">{{picture.name}}</h5>
+                            <p class="card-text">
+                                Modernity : {{picture.modernity}}/ Company : {{picture.company}} / Price : {{picture.price}} $  . 
+                            </p>
+                            <a value="12" class="btn btn-primary" >{{C_btn}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End tab -->
+    </div>
+</div>
